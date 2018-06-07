@@ -2,7 +2,7 @@ from keras.layers import Dense, Dropout, Flatten,Concatenate, Convolution2D, LST
 from keras.models import Model
 from keras.layers.normalization import BatchNormalization
 from keras.layers.merge import Add, Multiply
-from buildingBlocks import block_deepFlavourConvolutions, block_deepFlavourDense, block_SchwartzImage, block_deepFlavourBTVConvolutions
+from buildingBlocks_deepLepton import block_deepLeptonConvolutions, block_deepLeptonDense #, block_SchwartzImage, block_deepFlavourBTVConvolutions
 
 def model_deepLeptonReference(Inputs,nclasses,nregclasses,dropoutRate=0.1,momentum=0.6):
     """
@@ -22,7 +22,7 @@ def model_deepLeptonReference(Inputs,nclasses,nregclasses,dropoutRate=0.1,moment
     #vtx    =     BatchNormalization(momentum=momentum,name='vtx_input_batchnorm')     (Inputs[1])
     #ptreginput = BatchNormalization(momentum=momentum,name='reg_input_batchnorm')     (Inputs[4])
     
-    cpf, npf, ppf, epf, mpf = block_deepFlavourConvolutions(neutrals=npf,
+    npf, cpf, ppf, epf, mpf = block_deepLeptonConvolutions(neutrals=npf,
                                                 charged=cpf,
                                                 photons=ppf,
                                                 electrons=epf,
@@ -61,7 +61,7 @@ def model_deepLeptonReference(Inputs,nclasses,nregclasses,dropoutRate=0.1,moment
     
     x = Concatenate()( [globalvars,npf,cpf,ppf,epf,mpf])
     
-    x = block_deepFlavourDense(x,dropoutRate,active=True,batchnorm=True,batchmomentum=momentum)
+    x = block_deepLeptonDense(x,dropoutRate,active=True,batchnorm=True,batchmomentum=momentum)
     
     lepton_pred=Dense(nclasses, activation='softmax',kernel_initializer='lecun_uniform',name='ID_pred')(x)
     
