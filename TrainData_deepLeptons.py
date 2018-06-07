@@ -31,15 +31,17 @@ class TrainData_deepLeptons_Leptons(TrainData_fullTruth):
         'lep_etaSc', 'lep_full5x5_sigmaIetaIeta', 'lep_dEtaInSeed',
         'lep_dPhiScTrkIn', 'lep_relIso03', 'lep_eInvMinusPInv',
         'lep_lostHits_float', 'lep_convVeto_float', 'lep_hadronicOverEm', 
-        'lep_isElectron_float', 'lep_isMuon_float',
+        'lep_isElectron_float', 
+        'lep_jetDR', 'lep_dxy', 'lep_dz', 'lep_isGlobalMuon_float', 
+        'lep_isMuon_float',
         'lep_npfCands_neutral_float', 'lep_npfCands_charged_float', 'lep_npfCands_photon_float', 'lep_npfCands_electron_float', 'lep_npfCands_muon_float'
         ])
 
         self.addBranches(['pfCand_neutral_pt', 'pfCand_neutral_eta', 'pfCand_neutral_phi', 'pfCand_neutral_mass', 'pfCand_neutral_puppiWeight', 'pfCand_neutral_hcalFraction', 'pfCand_neutral_fromPV'],25)
         self.addBranches(['pfCand_charged_pt', 'pfCand_charged_eta', 'pfCand_charged_phi', 'pfCand_charged_mass', 'pfCand_charged_puppiWeight', 'pfCand_charged_hcalFraction', 'pfCand_charged_fromPV'],25)
         self.addBranches(['pfCand_photon_pt', 'pfCand_photon_eta', 'pfCand_photon_phi', 'pfCand_photon_mass', 'pfCand_photon_puppiWeight', 'pfCand_photon_hcalFraction', 'pfCand_photon_fromPV'],25)
-        self.addBranches(['pfCand_electron_pt', 'pfCand_electron_eta', 'pfCand_electron_phi', 'pfCand_electron_mass', 'pfCand_electron_puppiWeight', 'pfCand_electron_hcalFraction', 'pfCand_electron_fromPV'],25)
-        self.addBranches(['pfCand_muon_pt', 'pfCand_muon_eta', 'pfCand_muon_phi', 'pfCand_muon_mass', 'pfCand_muon_puppiWeight', 'pfCand_muon_hcalFraction', 'pfCand_muon_fromPV'],25)
+        self.addBranches(['pfCand_electron_pt', 'pfCand_electron_eta', 'pfCand_electron_phi', 'pfCand_electron_mass'],25)
+        self.addBranches(['pfCand_muon_pt', 'pfCand_muon_eta', 'pfCand_muon_phi', 'pfCand_muon_mass'],25)
 
 
     def readFromRootFile(self,filename,TupleMeanStd, weighter):
