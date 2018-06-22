@@ -4,11 +4,21 @@ from random import randint
 
 #merge infiles to TChain
 ch=ROOT.TChain("tree")
+
+#add local files to TChain
 TChainFiles = open("TChainFiles.txt", "r")
 FileList = TChainFiles.readlines()
 for TChainFile in FileList:
     TChainFile = TChainFile.strip()
     ch.Add(TChainFile)    
+    print(TChainFile+" added to TChain")
+
+#add dpm files to TChain
+TChainFiles = open("TChainFiles_crab.txt", "r")
+FileList = TChainFiles.readlines()
+for TChainFile in FileList:
+    TChainFile = TChainFile.strip()
+    ch.Add("root://hephyse.oeaw.ac.at//dpm/oeaw.ac.at/home/cms/store/user/gmortl/cmgTuples/lepton/"+TChainFile)    
     print(TChainFile+" added to TChain")
 
 #get numbers of entries and minimum of Prompt/NonPrompt/Fake
