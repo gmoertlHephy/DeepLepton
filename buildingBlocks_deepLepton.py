@@ -26,15 +26,19 @@ def block_deepLeptonConvolutions(charged,neutrals,photons,electrons,muons,dropou
     
     cpf=charged
     if active:
-        cpf = Convolution1D(32, 1, kernel_initializer='lecun_uniform',  activation='relu', name='cpf_conv0')(cpf)
+        cpf = Convolution1D(64, 1, kernel_initializer='lecun_uniform',  activation='relu', name='cpf_conv0')(cpf)
         if batchnorm:
             cpf = BatchNormalization(momentum=batchmomentum,name='cpf_batchnorm0')(cpf)
         cpf = Dropout(dropoutRate,name='cpf_dropout0')(cpf) 
-        cpf = Convolution1D(16, 1, kernel_initializer='lecun_uniform',  activation='relu', name='cpf_conv1')(cpf)
+        cpf = Convolution1D(32, 1, kernel_initializer='lecun_uniform',  activation='relu', name='cpf_conv1')(cpf)
         if batchnorm:
             cpf = BatchNormalization(momentum=batchmomentum,name='cpf_batchnorm1')(cpf)
-        cpf = Dropout(dropoutRate,name='cpf_dropout1')(cpf)
-        cpf = Convolution1D(4, 1, kernel_initializer='lecun_uniform',  activation='relu' , name='cpf_conv2')(cpf)
+        cpf = Dropout(dropoutRate,name='cpf_dropout1')(cpf) 
+        cpf = Convolution1D(16, 1, kernel_initializer='lecun_uniform',  activation='relu', name='cpf_conv2')(cpf)
+        if batchnorm:
+            cpf = BatchNormalization(momentum=batchmomentum,name='cpf_batchnorm2')(cpf)
+        cpf = Dropout(dropoutRate,name='cpf_dropout2')(cpf)
+        cpf = Convolution1D(4, 1, kernel_initializer='lecun_uniform',  activation='relu' , name='cpf_conv3')(cpf)
     else:
         cpf = Convolution1D(1,1, kernel_initializer='zeros',trainable=False)(cpf)
         
