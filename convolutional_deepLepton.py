@@ -4,7 +4,7 @@ from keras.layers.normalization import BatchNormalization
 from keras.layers.merge import Add, Multiply
 from buildingBlocks_deepLepton import block_deepLeptonConvolutions, block_deepLeptonDense #, block_SchwartzImage, block_deepFlavourBTVConvolutions
 
-def model_deepLeptonReference(Inputs,nclasses,nregclasses,dropoutRate=0.1,momentum=0.6):
+def model_deepLeptonReference(Inputs,nclasses,nregclasses,dropoutRate=0.2,momentum=0.6):
     """
     reference 1x1 convolutional model for 'deepLepton'
     with recurrent layers and batch normalisation
@@ -42,15 +42,15 @@ def model_deepLeptonReference(Inputs,nclasses,nregclasses,dropoutRate=0.1,moment
     cpf=BatchNormalization(momentum=momentum,name='cpflstm_batchnorm')(cpf)
     cpf = Dropout(dropoutRate)(cpf)
     
-    ppf  = LSTM(150,go_backwards=True,implementation=2, name='ppf_lstm')(ppf)
+    ppf  = LSTM(50,go_backwards=True,implementation=2, name='ppf_lstm')(ppf)
     ppf=BatchNormalization(momentum=momentum,name='ppflstm_batchnorm')(ppf)
     ppf = Dropout(dropoutRate)(ppf)
     
-    epf  = LSTM(150,go_backwards=True,implementation=2, name='epf_lstm')(epf)
+    epf  = LSTM(50,go_backwards=True,implementation=2, name='epf_lstm')(epf)
     epf=BatchNormalization(momentum=momentum,name='epflstm_batchnorm')(epf)
     epf = Dropout(dropoutRate)(epf)
     
-    mpf  = LSTM(150,go_backwards=True,implementation=2, name='mpf_lstm')(mpf)
+    mpf  = LSTM(50,go_backwards=True,implementation=2, name='mpf_lstm')(mpf)
     mpf=BatchNormalization(momentum=momentum,name='mpflstm_batchnorm')(mpf)
     mpf = Dropout(dropoutRate)(mpf)
     

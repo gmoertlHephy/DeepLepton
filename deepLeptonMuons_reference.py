@@ -10,7 +10,7 @@ train=training_base(testrun=False)
 newtraining= not train.modelSet()
 #for recovering a training
 if newtraining:
-    from models import model_deepLeptonReference
+        from models import model_deepLeptonReference
     
     train.setModel(model_deepLeptonReference,dropoutRate=0.2,momentum=0.3)
     
@@ -25,24 +25,24 @@ if newtraining:
                        )
 
 
-    train.train_data.maxFilesOpen=10 #5
+    train.train_data.maxFilesOpen=1 #5
     
     print(train.keras_model.summary())
-    model,history = train.trainModel(nepochs=2, 
-                                     batchsize=10000, #16384 #10000
+    model,history = train.trainModel(nepochs=4, 
+                                     batchsize=5000, #16384 #10000
                                      stop_patience=300, 
                                      lr_factor=0.5, 
                                      lr_patience=3, 
                                      lr_epsilon=0.0001, 
                                      lr_cooldown=6, 
                                      lr_minimum=0.0001, 
-                                     maxqsize=5
+                                     maxqsize=1
                                      )
     
     
     print('fixing input norms...')
     train.keras_model=fixLayersContaining(train.keras_model, 'input_batchnorm')
-    train.compileModel(learningrate=0.0003,
+    train.compileModel(learningrate=0.0005, #0.0003
                            loss=['categorical_crossentropy'],
                            #loss=['categorical_crossentropy',loss_meansquared],
                            metrics=['accuracy'],
@@ -53,12 +53,12 @@ if newtraining:
 print(train.keras_model.summary())
 #printLayerInfosAndWeights(train.keras_model)
 
-model,history = train.trainModel(nepochs=2, #sweet spot from looking at the testing plots 
-                                 batchsize=10000, #16384 #10000
+model,history = train.trainModel(nepochs=1, #sweet spot from looking at the testing plots 
+                                 batchsize=2500, #10000
                                  stop_patience=300, 
                                  lr_factor=0.8, 
                                  lr_patience=-3, 
                                  lr_epsilon=0.0001, 
                                  lr_cooldown=8, 
                                  lr_minimum=0.00001, 
-                                 maxqsize=5,verbose=1)
+                                 maxqsize=1,verbose=1)
