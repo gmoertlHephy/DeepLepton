@@ -10,7 +10,7 @@ train=training_base(testrun=False)
 newtraining= not train.modelSet()
 #for recovering a training
 if newtraining:
-        from models import model_deepLeptonReference
+    from models import model_deepLeptonReference
     
     train.setModel(model_deepLeptonReference,dropoutRate=0.2,momentum=0.3)
     
@@ -53,7 +53,7 @@ if newtraining:
 print(train.keras_model.summary())
 #printLayerInfosAndWeights(train.keras_model)
 
-model,history = train.trainModel(nepochs=1, #sweet spot from looking at the testing plots 
+model,history = train.trainModel(nepochs=2, #sweet spot from looking at the testing plots 
                                  batchsize=2500, #10000
                                  stop_patience=300, 
                                  lr_factor=0.8, 
