@@ -25,10 +25,10 @@ if newtraining:
                        )
 
 
-    train.train_data.maxFilesOpen=3 #5
+    train.train_data.maxFilesOpen=1 #5
     
     print(train.keras_model.summary())
-    model,history = train.trainModel(nepochs=2, 
+    model,history = train.trainModel(nepochs=3, 
                                      batchsize=9000, #16384 #10000
                                      stop_patience=300, 
                                      lr_factor=0.5, 
@@ -36,13 +36,13 @@ if newtraining:
                                      lr_epsilon=0.0001, 
                                      lr_cooldown=6, 
                                      lr_minimum=0.0001, 
-                                     maxqsize=3 #5
+                                     maxqsize=1 #5
                                      )
     
     
     print('fixing input norms...')
     train.keras_model=fixLayersContaining(train.keras_model, 'input_batchnorm')
-    train.compileModel(learningrate=0.0003,
+    train.compileModel(learningrate=0.0005, #0.0003
                            loss=['categorical_crossentropy'],
                            #loss=['categorical_crossentropy',loss_meansquared],
                            metrics=['accuracy'],
@@ -54,12 +54,12 @@ print(train.keras_model.summary())
 #printLayerInfosAndWeights(train.keras_model)
 
 model,history = train.trainModel(nepochs=2, #sweet spot from looking at the testing plots 
-                                 batchsize=9000, #16384 #10000
+                                 batchsize=4500, #16384 #10000
                                  stop_patience=300, 
                                  lr_factor=0.8, 
                                  lr_patience=-3, 
                                  lr_epsilon=0.0001, 
                                  lr_cooldown=8, 
                                  lr_minimum=0.00001, 
-                                 maxqsize=3, #5
+                                 maxqsize=1, #5
                                  verbose=1)

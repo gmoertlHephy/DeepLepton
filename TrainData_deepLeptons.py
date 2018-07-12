@@ -139,12 +139,12 @@ class TrainData_deepLeptons_Electrons(TrainData_fullTruth):
         '''
         TrainData_fullTruth.__init__(self)
 
-
         self.addBranches([
-        'lep_pt', 'lep_eta', 'lep_rho', #'lep_segmentCompatibility', 'lep_innerTrackChi2', 
-        'lep_etaSc', 'lep_full5x5_sigmaIetaIeta', 'lep_dEtaInSeed', 'lep_dPhiScTrkIn', 'lep_relIso03', 'lep_eInvMinusPInv', 'lep_lostHits_float', 'lep_convVeto_float', 'lep_hadronicOverEm', 
-        #'lep_jetDR', 'lep_dxy', 'lep_dz', #'lep_isGlobalMuon_float',
-        #'lep_npfCands_neutral_float', 'lep_npfCands_charged_float', 'lep_npfCands_photon_float', 'lep_npfCands_electron_float', 'lep_npfCands_muon_float'
+        'lep_pt', 'lep_eta', 'lep_rho', #'lep_segmentCompatibility',
+        'lep_etaSc', 'lep_full5x5_sigmaIetaIeta', 'lep_dEtaInSeed', 'lep_dPhiScTrkIn', 'lep_eInvMinusPInv', 'lep_convVeto_float', 'lep_hadronicOverEm',
+        'lep_relIso03', 'lep_lostHits_float', 'lep_innerTrackChi2',
+        'lep_jetDR', 'lep_dxy', 'lep_dz', #'lep_isGlobalMuon_float',
+        'lep_npfCands_neutral_float', 'lep_npfCands_charged_float', 'lep_npfCands_photon_float', 'lep_npfCands_electron_float', 'lep_npfCands_muon_float'
         ])
 
         self.addBranches(['pfCand_neutral_pt', 'pfCand_neutral_eta', 'pfCand_neutral_phi', 'pfCand_neutral_mass', 'pfCand_neutral_puppiWeight', 'pfCand_neutral_hcalFraction', 'pfCand_neutral_fromPV'],25)
