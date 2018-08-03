@@ -19,15 +19,15 @@ def model_deepLeptonReference(Inputs,nclasses,nregclasses,dropoutRate=0.2,moment
     ppf    =     BatchNormalization(momentum=momentum,name='ppf_input_batchnorm')     (Inputs[3])
     epf    =     BatchNormalization(momentum=momentum,name='epf_input_batchnorm')     (Inputs[4])
     mpf    =     BatchNormalization(momentum=momentum,name='mpf_input_batchnorm')     (Inputs[5])
-    #vtx    =     BatchNormalization(momentum=momentum,name='vtx_input_batchnorm')     (Inputs[1])
+    vtx    =     BatchNormalization(momentum=momentum,name='vtx_input_batchnorm')     (Inputs[6])
     #ptreginput = BatchNormalization(momentum=momentum,name='reg_input_batchnorm')     (Inputs[4])
     
-    npf, cpf, ppf, epf, mpf = block_deepLeptonConvolutions(neutrals=npf,
+    npf, cpf, ppf, epf, mpf, vtx = block_deepLeptonConvolutions(neutrals=npf,
                                                 charged=cpf,
                                                 photons=ppf,
                                                 electrons=epf,
                                                 muons=mpf,
-                                                #vertices=vtx,
+                                                vertices=vtx,
                                                 dropoutRate=dropoutRate,
                                                 active=True,
                                                 batchnorm=True, batchmomentum=momentum)
@@ -35,31 +35,31 @@ def model_deepLeptonReference(Inputs,nclasses,nregclasses,dropoutRate=0.2,moment
     
     #
     npf = LSTM(50,go_backwards=True,implementation=2, name='npf_lstm')(npf)
-    npf=BatchNormalization(momentum=momentum,name='npflstm_batchnorm')(npf)
+    npf = BatchNormalization(momentum=momentum,name='npflstm_batchnorm')(npf)
     npf = Dropout(dropoutRate)(npf)
     
     cpf  = LSTM(150,go_backwards=True,implementation=2, name='cpf_lstm')(cpf)
-    cpf=BatchNormalization(momentum=momentum,name='cpflstm_batchnorm')(cpf)
+    cpf = BatchNormalization(momentum=momentum,name='cpflstm_batchnorm')(cpf)
     cpf = Dropout(dropoutRate)(cpf)
     
-    ppf  = LSTM(50,go_backwards=True,implementation=2, name='ppf_lstm')(ppf)
-    ppf=BatchNormalization(momentum=momentum,name='ppflstm_batchnorm')(ppf)
+    ppf = LSTM(50,go_backwards=True,implementation=2, name='ppf_lstm')(ppf)
+    ppf = BatchNormalization(momentum=momentum,name='ppflstm_batchnorm')(ppf)
     ppf = Dropout(dropoutRate)(ppf)
     
-    epf  = LSTM(50,go_backwards=True,implementation=2, name='epf_lstm')(epf)
-    epf=BatchNormalization(momentum=momentum,name='epflstm_batchnorm')(epf)
+    epf = LSTM(50,go_backwards=True,implementation=2, name='epf_lstm')(epf)
+    epf = BatchNormalization(momentum=momentum,name='epflstm_batchnorm')(epf)
     epf = Dropout(dropoutRate)(epf)
     
-    mpf  = LSTM(50,go_backwards=True,implementation=2, name='mpf_lstm')(mpf)
-    mpf=BatchNormalization(momentum=momentum,name='mpflstm_batchnorm')(mpf)
+    mpf = LSTM(50,go_backwards=True,implementation=2, name='mpf_lstm')(mpf)
+    mpf = BatchNormalization(momentum=momentum,name='mpflstm_batchnorm')(mpf)
     mpf = Dropout(dropoutRate)(mpf)
     
-   # vtx = LSTM(50,go_backwards=True,implementation=2, name='vtx_lstm')(vtx)
-   # vtx=BatchNormalization(momentum=momentum,name='vtxlstm_batchnorm')(vtx)
-   # vtx = Dropout(dropoutRate)(vtx)
+    vtx = LSTM(50,go_backwards=True,implementation=2, name='vtx_lstm')(vtx)
+    vtx = BatchNormalization(momentum=momentum,name='vtxlstm_batchnorm')(vtx)
+    vtx = Dropout(dropoutRate)(vtx)
     
     
-    x = Concatenate()( [globalvars,npf,cpf,ppf,epf,mpf])
+    x = Concatenate()( [globalvars,npf,cpf,ppf,epf,mpf,vtx])
     
     x = block_deepLeptonDense(x,dropoutRate,active=True,batchnorm=True,batchmomentum=momentum)
     
