@@ -57,7 +57,7 @@ model,history = train.trainModel(nepochs=2, #sweet spot from looking at the test
                                  batchsize=4500, #16384 #10000
                                  stop_patience=300, 
                                  lr_factor=0.8, 
-                                 lr_patience=-3, 
+                                 lr_patience=3, 
                                  lr_epsilon=0.0001, 
                                  lr_cooldown=8, 
                                  lr_minimum=0.00001, 

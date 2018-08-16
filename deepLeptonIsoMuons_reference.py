@@ -28,7 +28,7 @@ if newtraining:
     train.train_data.maxFilesOpen=1 #5
     
     print(train.keras_model.summary())
-    model,history = train.trainModel(nepochs=10, 
+    model,history = train.trainModel(nepochs=7, 
                                      batchsize=9000, #16384 #10000
                                      stop_patience=300, 
                                      lr_factor=0.5, 
@@ -53,7 +53,7 @@ if newtraining:
 print(train.keras_model.summary())
 #printLayerInfosAndWeights(train.keras_model)
 
-model,history = train.trainModel(nepochs=5, #sweet spot from looking at the testing plots 
+model,history = train.trainModel(nepochs=2, #sweet spot from looking at the testing plots 
                                  batchsize=4500, #10000
                                  stop_patience=300, 
                                  lr_factor=0.8, 
