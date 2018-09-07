@@ -33,7 +33,7 @@ class TrainDataDeepLepton(TrainData):
         self.weightbranchY='lep_eta'
         
         self.weight_binX = numpy.array([
-                10,25,30,35,40,45,50,60,75,100,
+                10,12.5,15,17.5,20,25,30,35,40,45,50,60,75,100,
                 125,150,175,200,250,300,400,500,
                 600,2000],dtype=float)
         

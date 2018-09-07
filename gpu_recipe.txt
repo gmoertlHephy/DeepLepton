@@ -1,0 +1,114 @@
+###########################
+# DeepJetCore Intallation #
+###########################
+
+### install miniconda ###
+
+cd <afs work directory: you need some disk space for this!>
+wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
+
+=>  #set directory
+    Miniconda3 will now be installed into this location:
+    /afs/hephy.at/user/g/gmoertl/miniconda3
+
+      - Press ENTER to confirm the location
+      - Press CTRL-C to abort the installation
+      - Or specify a different location below
+
+    [/afs/hephy.at/user/g/gmoertl/miniconda3] >>> /afs/hephy.at/data/gmoertl01/DeepJet/miniconda3
+
+    #prepend path
+    WARNING:
+        You currently have a PYTHONPATH environment variable set. This may cause
+        unexpected behavior when running the Python interpreter in Miniconda3.
+        For best results, please verify that your PYTHONPATH only points to
+        directories of packages that are compatible with the Python interpreter
+        in Miniconda3: /afs/hephy.at/data/gmoertl01/DeepJet/miniconda3
+    Do you wish the installer to prepend the Miniconda3 install location
+    to PATH in your /afs/hephy.at/user/g/gmoertl/.bashrc ? [yes|no]
+    [no] >>> yes
+
+    Appending source /afs/hephy.at/data/gmoertl01/DeepJet/miniconda3/bin/activate to /afs/hephy.at/user/g/gmoertl/.bashrc
+    A backup will be made to: /afs/hephy.at/user/g/gmoertl/.bashrc-miniconda3.bak
+
+
+    For this change to become active, you have to open a new terminal.
+
+    Thank you for installing Miniconda3!
+
+#link path
+export PATH="/afs/hephy.at/data/gmoertl01/DeepJet/miniconda3/bin:$PATH"
+
+########################
+!!! log off / log on !!!
+########################
+
+### install DeepJetCore ###
+
+mkdir <your working dir>
+cd <your working dir>
+git clone https://github.com/DL4Jets/DeepJetCore
+cd DeepJetCore/environment
+./setupEnv.sh deepjetLinux3.conda gpu
+
+#if error try:
+(unset pythonpath)
+export PATH="/afs/hephy.at/data/gmoertl01/DeepJet/miniconda3/bin:$PATH"
+
+#activate environment
+source activate deepjetLinux3_gpu
+
+=>  /afs/hephy.at/work/g/gmoertl/CMSSW_9_4_6_patch1/src/DeepLepton/DeepJetCore/environment
+    Activate: ROOT has been sourced. Environment settings are ready. 
+    ROOTSYS=/afs/hephy.at/data/gmoertl01/DeepJet/miniconda3/envs/deepjetLinux3_gpu
+
+########################
+!!! log off / log on !!!
+########################
+
+### compile DeepJetCore ###
+
+cd <your working dir>
+cd DeepJetCore
+source ./gpu_env.sh
+cd compiled
+make -j4
+
+#######################
+# small Test Training #
+#######################
+
+cd <your working dir>
+
+cp -r /afs/hephy.at/work/g/gmoertl/CMSSW_9_4_6_patch1/src/DeepLepton/DeepJet DeepJet
+
+source ./gpu_env.sh
+
+./launch_small_muon_training.sh
+
+
+
+        Alternative:
+
+        ########################
+        # DeepJet Installation #
+        ########################
+
+        cd <your working dir>/DeepJet
+
+        change source to source ./ in gpu_env.sh
+
+        source ./gpu_env.sh
+
+        #######################
+        # small Test Training #
+        #######################
+
+        #File Conversion
+        convertFromRoot.py -i /eos/cms/store/cmst3/group/deepjet/NTuples/Thu_174149_full2016/ntuple_ttbar/output/test_samples.txt -o /afs/../TestConvertion -c TrainData_deepFlavour_FT_reg
+
+        #Launch Training
+        python deepFlavour_reference.py TestConversion/dataCollection.dc /afs/.../TestTraining
+
+

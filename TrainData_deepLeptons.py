@@ -30,8 +30,8 @@ class TrainData_deepLeptons_Electrons(TrainData_fullTruth):
         self.addBranches([
         'lep_pt', 'lep_eta', 'lep_rho', 'lep_innerTrackChi2',
         'lep_etaSc', 'lep_sigmaIEtaIEta', 'lep_full5x5_sigmaIetaIeta', 'lep_dEtaInSeed', 'lep_dPhiScTrkIn', 'lep_dEtaScTrkIn', 'lep_eInvMinusPInv', 'lep_convVeto_float', 'lep_hadronicOverEm', 'lep_r9',
-        #'lep_segmentCompatibility', 'lep_muonInnerTrkRelErr', 'lep_isGlobalMuon_float', 'lep_chi2LocalPosition', 'lep_chi2LocalMomentum', 'lep_globalTrackChi2', 'lep_glbTrackProbability',
-        'lep_relIso03', 'lep_relIso04', 'lep_miniRelIso', 'lep_lostHits_float', 'lep_innerTrackValidHitFraction',
+        #'lep_segmentCompatibility', 'lep_muonInnerTrkRelErr', 'lep_isGlobalMuon_float', 'lep_chi2LocalPosition', 'lep_chi2LocalMomentum', 'lep_globalTrackChi2', 'lep_glbTrackProbability', 'lep_trkKink', 'lep_caloCompatibility',
+        'lep_relIso03', 'lep_relIso04', 'lep_lostHits_float', 'lep_innerTrackValidHitFraction',
         'lep_jetDR', 'lep_dxy', 'lep_dz', 'lep_edxy', 'lep_edz', 'lep_ip3d', 'lep_sip3d', 'lep_EffectiveArea03', 
         'lep_jetPtRatiov1', 'lep_jetPtRelv1', 'lep_jetPtRatiov2', 'lep_jetPtRelv2', 'lep_ptErrTk', 
         'lep_npfCands_neutral_float', 'lep_npfCands_charged_float', 'lep_npfCands_photon_float', 'lep_npfCands_electron_float', 'lep_npfCands_muon_float'
@@ -150,8 +150,8 @@ class TrainData_deepLeptons_Muons(TrainData_fullTruth):
         self.addBranches([
         'lep_pt', 'lep_eta', 'lep_rho', 'lep_innerTrackChi2',
         #'lep_etaSc', 'lep_sigmaIEtaIEta', 'lep_full5x5_sigmaIetaIeta', 'lep_dEtaInSeed', 'lep_dPhiScTrkIn', 'lep_dEtaScTrkIn', 'lep_eInvMinusPInv', 'lep_convVeto_float', 'lep_hadronicOverEm', 'lep_r9',
-        'lep_segmentCompatibility', 'lep_muonInnerTrkRelErr', 'lep_isGlobalMuon_float', 'lep_chi2LocalPosition', 'lep_chi2LocalMomentum', 'lep_globalTrackChi2', 'lep_glbTrackProbability',
-        'lep_relIso03', 'lep_relIso04', 'lep_miniRelIso', 'lep_lostHits_float', 'lep_innerTrackValidHitFraction',
+        'lep_segmentCompatibility', 'lep_muonInnerTrkRelErr', 'lep_isGlobalMuon_float', 'lep_chi2LocalPosition', 'lep_chi2LocalMomentum', 'lep_globalTrackChi2', 'lep_glbTrackProbability', 'lep_trkKink', 'lep_caloCompatibility',
+        'lep_relIso03', 'lep_relIso04', 'lep_lostHits_float', 'lep_innerTrackValidHitFraction',
         'lep_jetDR', 'lep_dxy', 'lep_dz', 'lep_edxy', 'lep_edz', 'lep_ip3d', 'lep_sip3d', 'lep_EffectiveArea03', 
         'lep_jetPtRatiov1', 'lep_jetPtRelv1', 'lep_jetPtRatiov2', 'lep_jetPtRelv2', 'lep_ptErrTk', 
         'lep_npfCands_neutral_float', 'lep_npfCands_charged_float', 'lep_npfCands_photon_float', 'lep_npfCands_electron_float', 'lep_npfCands_muon_float'
